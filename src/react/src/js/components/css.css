@@ -1,0 +1,61 @@
+
+
+
+.big_font{
+	font-size: 27px;
+}
+
+.align_center{
+	text-align: center !important;
+	float: center;
+	align-items: center !important;
+}
+
+.back_lred{
+	background-color: #ff4f4f !important;
+}
+
+.back_blue{
+	background-color: #3df1f4 !important;
+}
+
+.back_grey{
+	background-color: grey !important;
+}
+
+.back_lgrey{
+	background-color: #d1d1d1 !important;
+}
+.back_fav{
+	color: #1a1356 !important;
+}
+
+
+
+.text_lred{
+	color: #ff4f4f !important;
+}
+
+.text_grey{
+	color: grey !important;
+}
+
+.text_white{
+	color: white !important;
+}
+
+.text_blue{
+	color: blue !important;
+}
+
+.text_lgrey{
+	color: #d1d1d1 !important;
+}
+.text_fav{
+	color: #1a1356 !important;
+}
+
+
+
+
+

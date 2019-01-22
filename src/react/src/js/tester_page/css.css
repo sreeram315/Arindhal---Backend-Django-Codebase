@@ -1,0 +1,17 @@
+
+
+.btn_danger_re{
+	background-color: red;
+}
+
+.danger_fade{
+	color: red;
+}
+
+.reset_form_btn:hover{
+	cursor: pointer;
+}
+
+.testt{
+	display: inline !important;
+}

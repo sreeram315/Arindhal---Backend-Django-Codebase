@@ -1,0 +1,72 @@
+
+.headname_local{
+	padding-left: 4.1% !important;
+}
+
+.headname_sd_local{
+	color: #1656bc;
+	font-size: 46px !important;
+}
+
+.inline_re{
+	display: inline !important;
+}
+
+.index_re{
+	color: #c60909 !important;
+}
+
+.img_class_local{
+	padding-top: 9%;
+}
+
+.pad_local{
+	padding-left: 4.1% !important;
+}
+
+.tester{
+	border: none !important;
+	color: black !important;
+}
+
+.student_nav{
+	align-items: center;
+}
+
+.student_table_re{
+	padding-left: 4%;
+}
+
+.sb_local{
+	padding-left: 30%;
+}
+
+.reset_btn_local{
+	text-decoration: none !important;
+}
+
+.reset_btn_local:hover{
+	color: white;
+}
+
+
+
+.btn_danger_re{
+	background-color: red;
+}
+
+.danger_fade{
+	color: red;
+}
+
+.reset_form_btn:hover{
+	cursor: pointer;
+}
+
+.testt{
+	display: inline !important;
+}
+
+::-webkit-input-placeholder {
+     opacity: 0.6 !important;
+}

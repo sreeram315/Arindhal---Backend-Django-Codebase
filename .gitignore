@@ -1,0 +1,15 @@
+*.py[cod]
+.DS_Store
+__pycache__/
+*.py[cod]
+*.class
+
+lib
+include
+bin
+
+src/node_modules
+src/staticfiles
+src/data
+src/db.sqlite3
+

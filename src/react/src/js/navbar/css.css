@@ -1,0 +1,77 @@
+
+.drop_toggle{
+	padding: 0px !important;
+	border-color: none !important;
+	border: none !important;
+	background-color: none !important;
+	color: none !important;
+	text-decoration-style: none !important;
+	text-decoration: none !important;
+	text-decoration-color: none !important;
+}
+
+.navbar_re{
+	background-color: #e3f2fd;
+	width: 100%;
+}
+
+.navdiv_re{
+	padding-bottom: 58px;
+}
+
+
+.form_login{
+
+}
+
+.login_btn{
+	width: 100%;
+}
+
+
+.button_login{
+	background-color: none !important;
+	text-decoration: none !important;
+}
+
+.no_dec{
+	text-decoration: none !important;
+	text-decoration-style: none !important;
+}
+
+.pad_0{
+	padding: 0 !important;
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+	padding-bottom: 0 !important;
+	padding-top: 0 !important;
+}
+
+
+.invisible{
+	display: none !important;
+	
+}
+
+.shead{
+	background-color: lightblue !important;
+	width: 100% !important;
+	font-family: AppleGothic
+}
+
+.invisible{
+	background-color: none !important;
+	
+}
+
+.no_back{
+	border: none !important;
+	background-color: #e3f2fd !important;
+	color: none !important;
+	text-decoration: none !important;
+}
+
+
+.width_100{
+	width: 100% !important;
+}

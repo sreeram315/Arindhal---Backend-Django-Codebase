@@ -1,0 +1,13 @@
+curl -X POST -H "Content-Type: application/json" -d '{"username":"srm","password":"srm"}' http://arindhal-dev.ap-south-1.elasticbeanstalk.com/api-token-auth/
+
+
+curl -H "Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6InNybSIsImV4cCI6MTU0ODEwNjQ3MSwiZW1haWwiOiIifQ.uQa-nXtm9icGLdUwu8K4A_z4vpfB4o7kn524Vkl2b0s" http://arindhal-dev.ap-south-1.elasticbeanstalk.com/api/students/all/
+
+
+
+curl -X POST -H "Content-Type: application/json" -d '{"username":"srm","password":"srm"}' http://127.0.0.1:8000/api-token-auth/
+
+curl -H "Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6InNybSIsImV4cCI6MTU0ODEwNjYxNCwiZW1haWwiOiIifQ.cOtO241JFyZCM_xr9IFA69D1B9pY7hrLUVkDLkuljKA" http://127.0.0.1:8000/api/students/all/
+
+
+
