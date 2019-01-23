@@ -26,11 +26,19 @@ class AccountBasicInfo(APIView):
 	permission_classes = [IsAuthenticated]
 	def get(self, request):
 		user = (AccountInfo.objects.filter(owner = request.user)).first()
-		username = user.username
+		username = user.owner.username
 		name     = user.name
+		following = user.is_following_usernames()
+		print(f"""
+
+			{user.username}
+
+
+			""")
 		data = {
-			'username': username,
-			'name'	  : name
+			'username'	: username,
+			'name'	  	: name,
+			'following'	: following
 		}
 
 		return Response(data)
@@ -93,18 +101,18 @@ class ToggleFollow(APIView):
 	permission_classes = [IsAuthenticated]
 	def post(self, request):
 		# try:
-		user2_username   = request.data.get("username")
-		user1			= self.request.user
-		action 			= request.data.get("action")
+		following   		= request.data.get("username")
+		follower			= self.request.user
+		action 				= request.data.get("action")
 
-		acc_1			= AccountInfo.objects.get(owner = user1)
-		acc_2 			= AccountInfo.objects.get(owner__username = user2_username).owner
+		follower			= AccountInfo.objects.get(owner = follower).owner
+		following 			= AccountInfo.objects.get(owner__username = following)
 		
 		if action=="toggle":
-			if acc_2 not in acc_1.followers.all():
-				acc_1.followers.add(acc_2)
-			elif acc_2 in acc_1.followers.all():
-				acc_1.followers.remove(acc_2)
+			if follower not in following.followers.all():
+				following.followers.add(follower)
+			elif follower in following.followers.all():
+				following.followers.remove(follower)
 			return Response("Action performed")
 		else:
 			return Response("Action failed")

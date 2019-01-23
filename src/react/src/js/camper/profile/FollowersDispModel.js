@@ -23,8 +23,6 @@ class FollowersDispModel extends React.Component {
 
   render () {
     let {headline, usersList, isOpen} = this.props
-    console.log('-----')
-    console.log(usersList)
     return (
       <div>
       <div >

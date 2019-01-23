@@ -1,4 +1,4 @@
-import { LOGIN, CHECK_AUTHENTICATION, USER_DETAILS, USER_UPDATE_PROFILE, USER_OPEN_DETAILS } from '../actions/types'
+import { LOGIN, CHECK_AUTHENTICATION, USER_DETAILS, USER_UPDATE_PROFILE, USER_OPEN_DETAILS, USER_BASIC_DETAILS } from '../actions/types'
 
 const initialState = {
   data: [],
@@ -6,7 +6,8 @@ const initialState = {
   token: false,
   loggedIn: false,
   toggler: 1,
-  userDetails: {}
+  userDetails: {},
+  userBasicDetails: {}
 }
 
 export default function (state = initialState, action) {
@@ -33,13 +34,11 @@ export default function (state = initialState, action) {
       // CHECK_AUTHENTICATION
     case CHECK_AUTHENTICATION:
       if ('token' in action.payload && action.payload.token[0] !== 'This field may not be blank.') {
-        console.log('LOGGED USER')
         return {
           ...state,
           isAuthenticated: true
         }
       } else {
-        console.log('NOT LOGGED USER')
         return {
           ...state,
           isAuthenticated: false
@@ -55,7 +54,6 @@ export default function (state = initialState, action) {
 
       // . USER_UPDATE_PROFILE
     case USER_UPDATE_PROFILE:
-      console.log('recusr of profile update')
       return {
         ...state,
         userDetails: action.payload
@@ -63,9 +61,15 @@ export default function (state = initialState, action) {
 
     // USER_OPEN_DETAILS
     case USER_OPEN_DETAILS:
+      console.log(action.payload)
       return {
         ...state,
         userDetails: action.payload
+      }
+    case USER_BASIC_DETAILS:
+      return {
+        ...state,
+        userBasicDetails: action.payload
       }
 
     default:

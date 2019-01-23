@@ -1,4 +1,4 @@
-import { LOGIN, CHECK_AUTHENTICATION, USER_DETAILS, USER_UPDATE_PROFILE, USER_OPEN_DETAILS } from './types'
+import { LOGIN, CHECK_AUTHENTICATION, USER_DETAILS, USER_UPDATE_PROFILE, USER_OPEN_DETAILS, USER_BASIC_DETAILS } from './types'
 import cookie from 'react-cookies'
 
 // export const fetchPosts = () => dispatch => {
@@ -42,7 +42,6 @@ export const loginAction = (loginData) => dispatch => {
 }
 
 export const checkAuthAction = () => dispatch => {
-  console.log('requesting auth...')
   let authToken = localStorage.getItem('authToken')
   if (authToken === undefined || authToken == null) { authToken = '0' }
   const endpoint = '/api-token-verify/'
@@ -65,6 +64,31 @@ export const checkAuthAction = () => dispatch => {
       return res.json()
     }).then(res => dispatch({
       type: CHECK_AUTHENTICATION,
+      payload: res
+    })).catch(function (error) {
+      console.log(error)
+    })
+}
+
+export const userBasicDetailsAction = () => dispatch => {
+  console.log('requesting basic user data')
+  let token = localStorage.getItem('authToken')
+  if (token === undefined || token === null || !token.length > 0 || token === 'null') { console.log('rejected'); return }
+  token = localStorage.getItem('authToken')
+  const endpoint = '/api/accounts/user-basic-details/'
+  let lookupOptions = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `JWT ${token}`
+    }
+  }
+
+  fetch(endpoint, lookupOptions)
+    .then(function (response) {
+      return response.json()
+    }).then(res => dispatch({
+      type: USER_BASIC_DETAILS,
       payload: res
     })).catch(function (error) {
       console.log(error)

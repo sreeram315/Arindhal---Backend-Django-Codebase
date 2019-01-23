@@ -11,32 +11,7 @@ class StudentData extends React.Component {
   }
 
   componentDidMount () {
-    var data = { 'name': 'Damini Naggi',
-      'reg_no': 11610382,
-      'cgpa': 8.52,
-      'section': 'E1615',
-      'gender': 'F',
-      'dob': '1998-08-03',
-      'batch': null,
-      'contact': '7347270981',
-      'address': 'House No. 149, Sunderbani, Sunderban Sunderbani - Jammu And Kashmir India',
-      'description': 'She was a very hard working girl!',
-      'father_name': 'Raj Kumar Naggi',
-      'mother_name': 'Rekha Naggi',
-      'father_contact': '9419152281',
-      'mother_contact': '9906089233',
-      'department': 'P136 : B.Tech. (Electrical Engineering)',
-      'school': '"School of Electronics and Electrical Engineering (SEEE) "',
-      'extra_content': 'Father 9419152281 11610382 Father 9906089233 11610382 Student 7347270981',
-      'image': 'https://i.ibb.co/W0w7dpq/11610382.png',
-      'owner': 'srm',
-      'slug': 'damini-naggi-a76a' }
-    data = this.props.data
-    if (data['gender'] === 'F') {
-      data['gender'] = 'Female'
-    } else {
-      data['gender'] = 'Male'
-    }
+
   }
 
   render () {
@@ -55,7 +30,7 @@ class StudentData extends React.Component {
 
           <Row>
             <Col sm={{ size: 6 }} xs={{ size: 12 }}><Display2Data index='Section' value={data.section} /></Col>
-            <Col sm={{ size: 5 }} xs={{ size: 12 }}><Display2Data index='Gender' value={data.gender} /></Col>
+            <Col sm={{ size: 5 }} xs={{ size: 12 }}><Display2Data index='Gender' value={data.gender === 'M' ? 'Male' : 'Female'} /></Col>
           </Row>
 
           <Row>

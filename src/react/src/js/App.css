@@ -44,6 +44,7 @@
   width: 4rem !important;
   height: 4rem !important;
 }
+button:focus {outline:0 !important;}
 
 .child_indi{
   position:absolute !important;
@@ -88,6 +89,9 @@
 }
 .hover_pointer:hover{
   cursor: pointer !important;
+}
+.hover_cursor:hover{
+  cursor: text !important;
 }
 .img_border_grey{
   border-style: solid !important;
@@ -159,6 +163,19 @@
 .padx-50{
   padding-left: 50%;
   padding-right: 50%
+}
+.pady-30{
+  padding-top: 30%;
+}
+
+.padt-20{
+  padding-top: 20% !important;
+}
+.padt-10{
+  padding-top: 10% !important;
+}
+.padt-30{
+  padding-top: 30% !important;
 }
 
 

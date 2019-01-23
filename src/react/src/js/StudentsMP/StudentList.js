@@ -85,6 +85,11 @@ class StudentList extends React.Component {
 
   }
 
+  searchButOnClick = (e) => {
+    e.preventDefault()
+    this.setState({butFocus: true})
+  }
+
   UNSAFE_componentWillReceiveProps(nextProps){
     this.loadData()
   }
@@ -116,7 +121,9 @@ class StudentList extends React.Component {
 
                   <Col>
 
-                    <SearchBox  placeholder='Name, Section, id ?' class='sb_local' type='info' name="q" onChange={this.updateQueries} outline />
+                  <div className="ar_re">
+                    <SearchBox focus={this.state.butFocus} onClick={this.searchButOnClick}  placeholder='Name, Section, id ?' class='sb_local' type='info' name="q" onChange={this.updateQueries} outline />
+                  </div>
 
                   </Col>
 

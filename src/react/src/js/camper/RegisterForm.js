@@ -33,7 +33,6 @@ class RegisterForm extends React.Component {
   sendForm = () => {
     const thisComp = this
     this.setState({submittingFormBuffer: true})
-    console.log('submitting form')
     const endpoint = '/api/accounts/user-register/'
     const csrf_token = cookie.load('csrftoken')
     let data = {
@@ -155,7 +154,9 @@ class RegisterForm extends React.Component {
 
   componentDidMount(){
     this.refs.stu_entry_form.reset()
+    
   }
+
 
   render () {
     const {vname, vusername, vpassword, name, username,usernameAvail, password, usernameBuffer, redirect, submittingFormBuffer} = this.state
@@ -171,7 +172,7 @@ class RegisterForm extends React.Component {
               <div className="al_re pl-2">
               <Row>
               <Col sm={8} >
-                <Input valid={vname} invalid={!vname && vname !== undefined} type='text' name='name' id='name' placeholder='Jonathan Thakur' value={name} onChange={this.form_update} />
+                <Input autoFocus ref="refTest" valid={vname} invalid={!vname && vname !== undefined} type='text' name='name' id='name' placeholder='Jonathan Thakur' value={name} onChange={this.form_update} />
                 <FormFeedback invalid className="al_re">Name should have a minimum of 3 letters</FormFeedback>
               </Col></Row></div>
             </FormGroup>

@@ -63,6 +63,19 @@ class AccountInfo(models.Model):
 	def login_re(self, username, password):
 		print('logging in')
 
+	def is_following_usernames(self):
+		usernames = []
+		following = self.owner.is_following.all()
+		print(f"""
+
+
+			{following}
+
+			""")
+		for user in following:
+			usernames.append(user.username)
+		return usernames
+
 	@property
 	def title(self):
 		return self.name

@@ -71,7 +71,6 @@ class LoginDropDown extends React.Component {
         wrongCredWarning: false,
         buffering: false
       })
-      console.log('data calling back')
       const {callBackFunction}=this.props
       callBackFunction()
     }
@@ -81,7 +80,6 @@ class LoginDropDown extends React.Component {
         buffering: false
       })
     }
-    console.log('data calling back')
     const {callBackFunction}=this.props
     callBackFunction()
 

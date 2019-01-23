@@ -18,6 +18,7 @@ urlpatterns = [
     re_path(r'^\.well-known/acme-challenge/HNw7IegsixZdlpIDJA6-0VbX2aa4aktZMeKpowy7u_I$', TemplateView.as_view(template_name = 'HNw7IegsixZdlpIDJA6-0VbX2aa4aktZMeKpowy7u_I'), name="temp1"),
     re_path(r'^api/students/', include('students.api.urls')),
     re_path(r'^api/', include('accounts.api.urls')),
+    re_path(r'^api/', include('twitter.api.urls')),
 
     
 

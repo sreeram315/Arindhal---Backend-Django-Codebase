@@ -15,7 +15,7 @@ import {
 
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { checkAuthAction } from '../actions/CamperActions'
+import { checkAuthAction, userBasicDetailsAction } from '../actions/CamperActions'
 
 import './css.css'
 import SearchBox from '../components/SearchBox'
@@ -31,7 +31,8 @@ class NavbarMain extends React.Component {
     this.state = {
       isOpen: false,
       isAuthenticated: false,
-      Uname: ''
+      Uname: '', 
+      userBasicDetails: {}
     }
   }
 
@@ -56,32 +57,14 @@ class NavbarMain extends React.Component {
   }
 
   getUserName = () => {
-    let token = localStorage.getItem('authToken')
-    if( token===undefined || token===null || !token.length > 0 || token==='null' ){console.log('rejected');return;}
-    let thisComp = this
-    token = localStorage.getItem('authToken')
-    console.log('requesting user basic info... with token', token)
-    const endpoint = '/api/accounts/user-basic-details/'
-    let lookupOptions = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `JWT ${token}`
-      },
-    }
-
-    fetch(endpoint, lookupOptions)
-      .then(function (response)  {
-        return response.json()
-      }).then(function (responseData) {
-        thisComp.setState({Uname: responseData.name, Uusername: responseData.username})
-      }).catch(function (error) {
-        console.log(error)
-      })
+    this.props.userBasicDetailsAction()
+    let userData = this.props.userBasicDetails
+    if (userData!==undefined && userData!==null && 'name' in userData )
+      {this.setState({Uname: userData.name, Uusername: userData.username})}
   }
 
    UNSAFE_componentWillReceiveProps(nextProps) {
-     if (nextProps.isAuthenticated===true){
+     if (nextProps.isAuthenticated===true && this.state.Uname==''){
        this.getUserName()
      }
    }
@@ -91,8 +74,7 @@ class NavbarMain extends React.Component {
   }
 
   render () {
-    if(this.state.Uname==='' && this.props.isAuthenticated){this.getUserName}
-    console.log('calling check authneication')
+    if(this.state.Uname==='' && this.props.isAuthenticated){this.getUserName()}
     this.props.checkAuthAction()
     var a_link = this.props.active
     let {isAuthenticated} = this.props
@@ -169,15 +151,15 @@ class NavbarMain extends React.Component {
 
 NavbarMain.propTypes = {
   checkAuthAction: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool
+  isAuthenticated: PropTypes.bool,
+  userBasicDetailsAction: PropTypes.func.isRequired,
+  userBasicDetails: PropTypes.object
 }
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.camper.isAuthenticated
+  isAuthenticated: state.camper.isAuthenticated,
+  userBasicDetails: state.camper.userBasicDetails
 })
 
-// function mapStateToProps = (state) => {
-//   console.log(state)
-// }
 
-export default connect(mapStateToProps, { checkAuthAction })(NavbarMain)
+export default connect(mapStateToProps, { checkAuthAction, userBasicDetailsAction })(NavbarMain)

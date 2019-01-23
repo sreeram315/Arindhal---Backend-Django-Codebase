@@ -19,7 +19,6 @@ class KaalaSearchContent extends React.Component {
   loadData = (q) => {
     this.setState({buffering: true})
     let thisComp = this
-    console.log('requesting kaala data...')
     const endpoint = `/api/camper-kaala-search/?q=${q}`
     let lookupOptions = {
       method: 'GET',
@@ -40,7 +39,6 @@ class KaalaSearchContent extends React.Component {
   }
 
   componentDidMount(){
-    console.log('COmponent mounted')
     this.loadData(this.props.q)
   }
 
@@ -53,7 +51,6 @@ class KaalaSearchContent extends React.Component {
   
 
   render () {
-    console.log("RENDERING WITH PROP =", this.props.q)
     let users = this.state.data.users
     let {data, buffering} = this.state
     return (

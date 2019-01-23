@@ -22,7 +22,7 @@ class OpenProfileView extends React.Component {
                     <OpenProfileData slug={slug} />
                   </Col>
                   <Col md={{ size: 3, order: 2 }} xs={{ size: 12, order: 1 }} className='img_class_local'>
-                    <ImageComp src='http://sreeram.rocks/images/logo.jpeg' width='100%' cn='img-responsive img-thumbnail' border_cn='img_border_grey' />
+                    <ImageComp src='' width='100%' cn='img-responsive img-thumbnail' border_cn='img_border_grey' />
 
                   </Col>
                 </Row>

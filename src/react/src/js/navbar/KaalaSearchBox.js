@@ -25,7 +25,6 @@ class KaalaSearchBox extends React.Component {
   }
 
   handleOnChange = (e) => {
-    console.log(e.target.value)
     let value = e.target.value
     this.handleToggle(value)
     this.setState({q: value})
@@ -36,14 +35,22 @@ class KaalaSearchBox extends React.Component {
     else{this.setState({dropdownOpen: false})}
   }
 
+  toggle = () => {
+    console.log('toggle')
+    this.setState({focus: true})
+  }
+
+  componentDidMount(){
+    console.log(this.refs.kaalaSearchref)
+  }
+
   render () {
-    console.log('q = ', this.state.q)
     return (
       <div className='ac_re'>
       <Dropdown isOpen={this.state.dropdownOpen} className="">
       
-        <DropdownToggle className="no_back pad_0">
-        <SearchBox nobutton type='info' onChange={this.handleOnChange} placeholder="Kaala Search" onClick={this.handleOnClick}/></DropdownToggle>
+        <DropdownToggle onClick={this.toggle} className="no_back hover_cursor pad_0">
+        <SearchBox focus={this.state.focus} nobutton type='info' onChange={this.handleOnChange} placeholder="Kaala Search" onClick={this.handleOnClick}/></DropdownToggle>
         <div className="width_100 child_indi">
             <DropdownMenu left className="pad_0" onClick={this.closeMenu} >
               <KaalaSearchContent q={this.state.q}/>

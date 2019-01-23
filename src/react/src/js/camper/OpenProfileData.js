@@ -9,19 +9,26 @@ import cookie from 'react-cookies'
 import { Display2Data, DisplayData } from '../components/DisplayData'
 import HRline from '../components/HRline'
 import Loader from '../components/Loader'
+import RedirectTo from '../components/RedirectTo'
 
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { userOpenDetailAction, checkAuthAction } from '../actions/CamperActions'
+import { userOpenDetailAction, checkAuthAction, userBasicDetailsAction } from '../actions/CamperActions'
+
+
 
 class OpenProfileData extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
       data: '',
+      userBasicDetails: {},
       followersModel: false,
       followingModel: false,
-      buffering: true
+      buffering: true,
+      hoverFollowButText: 'Unfollow',
+      hoveringFollow: false,
+      redirect404: false
     }
   }
 
@@ -39,19 +46,21 @@ class OpenProfileData extends React.Component {
     this.setState({followersModel: true})
   }
 
-   componentDidMount() {
-    this.props.checkAuthAction()
-    this.props.userOpenDetailAction(this.props.slug)
-  }
+
 
   UNSAFE_componentWillReceiveProps(nextProps){
+    console.log(nextProps.userDetails)
     if('userDetails' in nextProps){
       this.setState({buffering: false})
+    }
+    if('userDetails' in nextProps && 'detail' in nextProps.userDetails && nextProps.userDetails.detail==='Not found.'){
+      // this.setState({redirect404: true})
     }
   }
 
    toggleFollow = () => {
       const thisComp = this
+      console.log("follow", this.props.userDetails.username)
     // this.setState({submittingFormBuffer: true})
     console.log('performing follow toggle')
     const endpoint = '/api/accounts/user-follow-toggle/'
@@ -78,21 +87,45 @@ class OpenProfileData extends React.Component {
         return res.json()
       }).then(function (json)  {
          console.log(json)
-         thisComp.props.userOpenDetailAction()
+         thisComp.setState({buffering: true })
+         thisComp.props.userOpenDetailAction(thisComp.props.slug)
+         thisComp.props.userBasicDetailsAction()
       })
       .catch(function (error) {
         console.log(error)
       })
   }
 
+  hoveringFollow = () => {
+    this.setState({hoveringFollow: true,})
+  }
+  leavingFollow = () => {
+    this.setState({hoveringFollow: false,})
+  }
+
+  componentDidMount() {
+    this.props.checkAuthAction()
+    this.props.userOpenDetailAction(this.props.slug)
+    this.props.userBasicDetailsAction()
+  }
+
+
+
 
 
 
   render () {
+    if(this.state.redirect404){
+      return (
+        <RedirectTo path="/404"/>
+        )
+    }
     let { buffering } = this.state
-    let {isAuthenticated} = this.props
+    let {isAuthenticated , userBasicDetails } = this.props
     let data = this.props.userDetails
-    if(data.slug!==this.props.slug){this.props.userOpenDetailAction(this.props.slug)}
+    let alreadyFollowing = userBasicDetails.following!==undefined && data.username!==undefined && (userBasicDetails.following).includes(data.username)
+    let personIsSelfViewing = data.username===userBasicDetails.username
+    if(data.slug!==this.props.slug){this.props.userOpenDetailAction(this.props.slug); this.props.userBasicDetailsAction()}
     return (
       <div>
       { buffering===false ? 
@@ -101,12 +134,25 @@ class OpenProfileData extends React.Component {
           <Col sm={{ size: 9 }}>
             <div className='headname_sd_local lead'>{data.name}</div>
           </Col>
-          {isAuthenticated===true ? 
-          <Col sm={{ size: 3 }}>
-            <div className="local_up2">
-              <Button outline color="primary" onClick={this.toggleFollow}>Follow</Button>
-            </div>
-          </Col> : '' }
+         
+          {!personIsSelfViewing ?
+            <div>
+            {isAuthenticated===true ? 
+            <Col sm={{ size: 3 }}>
+              <div className="local_up2">
+                <Button className="button_no_out" outline color={this.state.hoveringFollow&&alreadyFollowing ? "danger" : "info"} onClick={this.toggleFollow} onMouseEnter={this.hoveringFollow} onMouseLeave={this.leavingFollow}>
+                
+                {this.state.hoveringFollow&&alreadyFollowing ? this.state.hoverFollowButText :
+                <div>{alreadyFollowing ? 'Following' : 'Follow'}</div>
+              }
+
+                </Button>
+              </div>
+            </Col> : '' }</div>
+            : '' }
+
+
+
         </Row>
         <HRline />
 
@@ -153,14 +199,17 @@ class OpenProfileData extends React.Component {
 OpenProfileData.propTypes = {
   userDetails: PropTypes.object.isRequired,
   isAuthenticated: PropTypes.bool,
+  userBasicDetailsAction: PropTypes.func.isRequired,
+  userBasicDetails: PropTypes.object,
 }
 
 const mapStateToProps = state => ({
   userDetails: state.camper.userDetails,
-  isAuthenticated: state.camper.isAuthenticated
+  isAuthenticated: state.camper.isAuthenticated,
+  userBasicDetails: state.camper.userBasicDetails
 })
 
-export default connect(mapStateToProps, { userOpenDetailAction, checkAuthAction })(OpenProfileData)
+export default connect(mapStateToProps, { userOpenDetailAction, userBasicDetailsAction, checkAuthAction })(OpenProfileData)
 
 
 
